@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams,NavLink, useLocation, useSearchParams } from 'react-router-dom'
 
 const VanDetail = () => {
     const {id} = useParams();
-
+    const location = useLocation();
+    console.log(location)
+    const searchQuery = location.state?.search || "";
+    const vanType = location.state?.type || "all";
     const [van, setVan] = useState({});
     
     useEffect(() => {
@@ -14,8 +17,14 @@ const VanDetail = () => {
   return (
     
     <div className = "flex flex-col p-5 gap-5 bg-[#FFF7ED] bg-cover w-screen">
-
-        <div className = "rounded-xl">
+             <NavLink 
+            to= {`..${searchQuery}`} 
+            end 
+            relative = "path"
+            className={({ isActive }) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-lg" : " hover:underline hover:text-black font-semibold text-lg text-[#4D4D4D] font-inter"}>
+            &larr; Back to {vanType} vans
+        </NavLink>
+        <div className = "rounded-xl w-1/3">
         <img src = {van.imageUrl} className = "w-full rounded-2xl"/>    
         </div>
 

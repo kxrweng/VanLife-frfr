@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import { useSearchParams,NavLink } from 'react-router-dom';
 
 const VanNavbar = () => {
-  const [categorySelected, setCategorySelected] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = (searchParams.get("type"));
   const handleCategorySelected = (key,value) => {

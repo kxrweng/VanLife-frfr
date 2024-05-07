@@ -1,16 +1,20 @@
 import React, {useState , useEffect} from 'react'
 import VanNavbar from '../../Components/VanNavbar';
-import {Link, useSearchParams} from 'react-router-dom'
+import {Link, useSearchParams, useLoaderData} from 'react-router-dom'
+import { getVans } from '../../Utils/Api';
+
+export function loader (){
+    return getVans();
+}
+
 const Vans = () => {
-    const [vans, setVans ] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
     const typeFilter = searchParams.get("type");
 
-    useEffect(() => {
-    fetch("/api/vans").then((res) => res.json()).then((data) => setVans(data.vans))
-    }, [])
-
+    const vans = useLoaderData();
     const displayedVans = typeFilter ? vans.filter((van) => van.type === typeFilter) : vans;
+
+    
 
   return (
     <div className = "flex flex-col p-10 bg-[#FFF7ED]">
@@ -21,7 +25,7 @@ const Vans = () => {
             return(
                 
                 <div className = "flex flex-row bg-[#FFF7ED] p-5 gap-5 rounded-xl" key = {van.id}>
-                    <Link to = {`${van.id}`}> 
+                    <Link to = {van.id} state = {{search : `?${searchParams.toString()}`, type : typeFilter}}> 
                     <div> 
                         <img src = {van.imageUrl} className = "w-[230px] h-[230px] rounded-xl"/>
                     </div>
@@ -56,6 +60,6 @@ const Vans = () => {
         </div>
     </div>
   )
-}
 
+}
 export default Vans

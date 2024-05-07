@@ -10,7 +10,8 @@ export default {
         'home-background' : "url('frontend\\public\\homeBackground.png')",
       },
       fontFamily : {
-        'inter' : 'Inter, sans-serif'
+        'inter' : 'Inter, sans-serif',
+        'tinos' : 'Tinos, serif',
       }
     },
   },
