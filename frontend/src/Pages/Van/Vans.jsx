@@ -1,23 +1,27 @@
 import React, {useState , useEffect} from 'react'
 import VanNavbar from '../../Components/VanNavbar';
-import {Link} from 'react-router-dom'
+import {Link, useSearchParams} from 'react-router-dom'
 const Vans = () => {
     const [vans, setVans ] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const typeFilter = searchParams.get("type");
+
     useEffect(() => {
     fetch("/api/vans").then((res) => res.json()).then((data) => setVans(data.vans))
     }, [])
 
-    
+    const displayedVans = typeFilter ? vans.filter((van) => van.type === typeFilter) : vans;
+
   return (
     <div className = "flex flex-col p-10 bg-[#FFF7ED]">
         <VanNavbar/>
 
         <div className = "flex flex-col gap-10 ">
-           {vans.map((van) => {
+           {displayedVans.map((van) => {
             return(
                 
                 <div className = "flex flex-row bg-[#FFF7ED] p-5 gap-5 rounded-xl" key = {van.id}>
-                    <Link to = {`/vans/${van.id}`}> 
+                    <Link to = {`${van.id}`}> 
                     <div> 
                         <img src = {van.imageUrl} className = "w-[230px] h-[230px] rounded-xl"/>
                     </div>
@@ -45,10 +49,7 @@ const Vans = () => {
                             </div>
                         )}
                     </div>
-
                     </div>
-                    
-
                 </div>
             )
            })}
