@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 const Home = () => {
   return (
-   <div className = " p-20 bg-[url('/homeBackground.png')] bg-no-repeat bg-cover">
-    <div className = "flex flex-col justify-center items-center gap-32 p-10 ">
+   <div className = "p-20 bg-[url('/homeBackground.png')] bg-no-repeat bg-cover">
+    <div className = "flex flex-col justify-center items-center gap-32 p-10 h-screen ">
         <div className = "font-extrabold text-white text-7xl font-inter items-center justify-center">
         You got the travel plans, we got the travel vans.
         </div>

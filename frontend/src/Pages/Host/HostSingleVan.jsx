@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {useParams, NavLink, Outlet, useOutletContext} from 'react-router-dom'
+import {useParams, NavLink, Outlet, useOutletContext, useLoaderData} from 'react-router-dom'
+import { getHostVans } from '../../Utils/Api'
+import { requireAuth } from '../../Utils/RequireAuth'
 
+export async function Loader ({params}) {
+    await requireAuth();
+    return getHostVans(params.id)
+}
 const HostSingleVan = () => {
     //         <Outlet context = {{singleVan}}/> 
 //Passing an anonymous object with singleVan as a key, with singleVan from the state as the value
-    const {id} = useParams()
-    const [singleVan, setSingleVan] = useState({});
-    useEffect( () => {
-        fetch(`/api/host/vans/${id}`).then((res) => res.json()).then((data) => setSingleVan(data.vans[0]));
-    },[])
-    
+    const singleVan = useLoaderData();
     return (
         <div className="flex flex-col gap-5 p-5  bg-[#FFF7ED] ">
        

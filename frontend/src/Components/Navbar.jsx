@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {Link,Outlet, NavLink} from 'react-router-dom'
 import Home from '../Pages/General/Home'
 import About from '../Pages/General/About'
+import { Icon } from '@iconify-icon/react';
+
 const Navbar = () => {
   const [selectedSection, setSelectedSection] = useState('home');
 
@@ -20,11 +22,11 @@ const Navbar = () => {
          </div> */}
          <NavLink to ="/" className = "font-extrabold font-inter text-4xl" >#VanLife</NavLink>
          <div className = "flex flex-row items-center justify-evenly w-1/3">
-         <NavLink to = "/host" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-lg" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-lg "}>Host</NavLink>
-         <NavLink to = "/" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-lg" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-lg "}>Home</NavLink>
-         <NavLink to = "/about" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-lg" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-lg "}>About</NavLink>
-         <NavLink to = "/vans" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-lg" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-lg "}>Vans</NavLink>
-
+         <NavLink to = "/host" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-2xl" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-xl "}>Host</NavLink>
+         <NavLink to = "/" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-2xl" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-xl "}>Home</NavLink>
+         <NavLink to = "/about" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-2xl" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-xl "}>About</NavLink>
+         <NavLink to = "/vans" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-2xl" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-xl "}>Vans</NavLink>
+         <NavLink to = "/login"><img className = "w-[30px] h-[30px]"src = "/userIcon.png"/></NavLink>
          </div>
          
 

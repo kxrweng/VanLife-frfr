@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react'
-import { useParams,NavLink, useLocation, useSearchParams } from 'react-router-dom'
+import { useParams,NavLink, useLocation, useSearchParams, useLoaderData } from 'react-router-dom'
+import { getHostVans } from '../../Utils/Api';
+
+export function Loader ({params}) {
+    const {id} = params;
+    return getHostVans(id);
+}
 
 const VanDetail = () => {
-    const {id} = useParams();
-    const location = useLocation();
-    console.log(location)
+    const location = useLocation(); //To get information from Link State
+    
     const searchQuery = location.state?.search || "";
     const vanType = location.state?.type || "all";
-    const [van, setVan] = useState({});
-    
-    useEffect(() => {
-        fetch(`/api/vans/${id}`).then((res) => res.json()).then((data) => setVan(data.vans))
-    },[])
+
+    const vans = useLoaderData();
+
 
  /* Conditional rendering, if van == null, then render loading, else render everything, still haven't been achieved*/
   return (

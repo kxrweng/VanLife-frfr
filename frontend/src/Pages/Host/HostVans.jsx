@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLoaderData } from 'react-router-dom'
+import { getHostVans } from '../../Utils/Api';
+import { requireAuth } from '../../Utils/RequireAuth';
 
-
+//This is not under protected route. Debugging....
+export async function Loader () {
+    await requireAuth();
+    return getHostVans();
+}
 const HostVans = () => {
-
-    const [hostVans, setHostVans] = useState([]);
-
-    useEffect( () => {
-    fetch("/api/host/vans").then((res) => res.json()).then(data => setHostVans(data.vans));
-    }, [])
-
-    
+const hostVans = useLoaderData();
   return (
     <div className = "flex flex-col px-10 pb-10 gap-10 bg-[#FFF7ED]">
         <div className = "flex ">
@@ -22,9 +21,8 @@ const HostVans = () => {
         <div className = "flex flex-col gap-10">
             {hostVans.map((van) => {
                 return(
-                    
-        <div className = "flex bg-white p-10 rounded-xl flex-row gap-10" key = {van.id}>
-                        
+                <div className = "flex bg-white p-10 rounded-xl flex-row gap-10" key = {van.id}>
+        
                         <div className = "flex w-1/5 rounded-xl">
                             <NavLink to = {`/host/vans/${van.id}`}>
                             <img src = {van.imageUrl} className = "w-full rounded-xl"/>
