@@ -16,7 +16,6 @@ const VanDetail = () => {
     const vans = useLoaderData();
 
 
- /* Conditional rendering, if van == null, then render loading, else render everything, still haven't been achieved*/
   return (
     
     <div className = "flex flex-col p-5 gap-5 bg-[#FFF7ED] bg-cover w-screen">

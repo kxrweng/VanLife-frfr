@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom'
 
 const PageNotFound = () => {
 
-    const handleClick = () => {
-
-    }
+   
   return (
     <div className = "h-screen flex justify-center flex-col gap-10 bg-[#FFF7ED]">
         <div className = "text-4xl font-bold font-inter text-center">

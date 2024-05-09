@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useLoaderData, Form } from 'react-router-dom';
+import { useLoaderData, Form, useNavigate, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { loginUser } from '../../Utils/Api';
 
 export function loader({ request }) {
@@ -15,18 +15,29 @@ export async function  action ({request}){
     const formData = await request.formData();
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log(email,password);
-    return null;
 
+    try{
+        const data = await loginUser({email,password});
+        console.log(data);
+        localStorage.setItem("LoggedIn",true);
+        const response = redirect("/host");
+        response.body = true;
+        return response
+
+    }
+    catch(error){
+        console.log(error);
+        return error.message;
+    }
+    
 }
 const Login = () => {
+    const navigation = useNavigation();
+    const status = navigation.state;
     const warningMsg = useLoaderData();
+    const errorMsg = useActionData();
 
-    const [error,setErrorMessage] = useState(null)
 
-    
-
-   
   return (
     <div className = "flex flex-col  bg-[#FFF7ED] justify-center h-screen">
 
@@ -37,7 +48,8 @@ const Login = () => {
         {warningMsg && <h2 className = " text-2xl my-5 font-bold font-inter text-center text-red-700"> {warningMsg} </h2>}
 
 
-        <Form className = "flex flex-col gap-20 p-10 justify-center" method = "post">
+
+        <Form className = "flex flex-col gap-20 p-10 justify-center" method = "post" replace>
             <div className = "flex flex-col gap-2">
             <div className = "flex justify-center">
             <input name = "email"   type = "text" placeholder = "Email Address" className = "border-2 rounded-xl font-inter font-semibold w-1/2 p-4" />
@@ -58,7 +70,7 @@ const Login = () => {
             </div> 
            
 
-            {error && <h2 className = " text-2xl my-5 font-bold font-inter text-center text-red-700"> {error} </h2>}
+            {errorMsg && <h2 className = " text-2xl my-5 font-bold font-inter text-center text-red-700"> {errorMsg} </h2>}
 
 
         </Form>

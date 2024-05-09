@@ -27,7 +27,9 @@ import ErrorPage from './Pages/General/ErrorPage'
 import { createBrowserRouter,RouterProvider, createRoutesFromElements } from 'react-router-dom'
 import Login, {loader as LoginLoader, action as LoginAction} from './Pages/General/Login'
 import { requireAuth } from './Utils/RequireAuth'
+
 const App = () => {
+  localStorage.removeItem("LoggedIn")
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path = "/" element = {<Layout />}  errorElement = {<ErrorPage />}>
             
