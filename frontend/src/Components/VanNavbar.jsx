@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useSearchParams,NavLink } from 'react-router-dom';
-
+// This file is rendered no use since I moved everything into Vans :(
 const VanNavbar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = (searchParams.get("type"));

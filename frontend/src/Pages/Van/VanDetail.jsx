@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { useParams,NavLink, useLocation, useSearchParams, useLoaderData } from 'react-router-dom'
-import { getHostVans } from '../../Utils/Api';
+import { getVan } from '../../Utils/Api';
 
 export function Loader ({params}) {
     const {id} = params;
-    return getHostVans(id);
+    console.log(id)
+    console.log(getVan(id))
+    return getVan(id);
 }
 
 const VanDetail = () => {
@@ -14,7 +16,7 @@ const VanDetail = () => {
     const vanType = location.state?.type || "all";
 
     const van = useLoaderData();
-
+    console.log(van)
 
   return (
     
