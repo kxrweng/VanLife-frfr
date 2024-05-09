@@ -3,8 +3,9 @@ import {useParams, NavLink, Outlet, useOutletContext, useLoaderData} from 'react
 import { getHostVans } from '../../Utils/Api'
 import { requireAuth } from '../../Utils/RequireAuth'
 
-export async function Loader ({params}) {
-    await requireAuth();
+export async function Loader ({params , request}) {
+    console.log(request);
+    await requireAuth(request);
     return getHostVans(params.id)
 }
 const HostSingleVan = () => {

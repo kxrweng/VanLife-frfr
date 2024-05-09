@@ -11,16 +11,17 @@ export function loader({ request }) {
     return new URL(request.url).searchParams.get("message")
 }
 
-export async function  action ({request}){
+export async function action ({request}){
     const formData = await request.formData();
     const email = formData.get("email");
     const password = formData.get("password");
-
+    const redirectToPath = new URL(request.url).searchParams.get("redirectTo") || "/host"
+    console.log(redirectToPath)
     try{
         const data = await loginUser({email,password});
         console.log(data);
         localStorage.setItem("LoggedIn",true);
-        const response = redirect("/host");
+        const response = redirect(redirectToPath);
         response.body = true;
         return response
 

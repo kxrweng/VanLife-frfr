@@ -4,8 +4,9 @@ import { getHostVans } from '../../Utils/Api';
 import { requireAuth } from '../../Utils/RequireAuth';
 
 //This is not under protected route. Debugging....
-export async function Loader () {
-    await requireAuth();
+export async function Loader ({request}) {
+    console.log(request);
+    await requireAuth(request);
     return getHostVans();
 }
 const HostVans = () => {

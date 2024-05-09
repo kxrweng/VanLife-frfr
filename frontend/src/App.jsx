@@ -40,20 +40,20 @@ const App = () => {
     <Route path = "vans/:id" element = {<VanDetail />} />
 
     <Route path = "host" element = {<HostLayout />}  >
-      <Route index element = {<HostMain />} loader = {async () => 
-        await requireAuth()}/>
-      <Route path = "income" element = {<HostIncome />} loader = {async () => 
-        await requireAuth()}  />
-      <Route path = "reviews" element = {<HostReviews />} loader = {async () => 
-        await requireAuth()}/>
+      <Route index element = {<HostMain />} loader = {async ({request}) => 
+        await requireAuth(request)}/>
+      <Route path = "income" element = {<HostIncome />} loader = {async ({request}) => 
+        await requireAuth(request)}  />
+      <Route path = "reviews" element = {<HostReviews />} loader = {async ({request}) => 
+        await requireAuth(request)}/>
       <Route path = "vans" element = {<HostVans />} loader = {HostVansLoader} /> 
       <Route path = "vans/:id" element = {<HostSingleVan/>} loader = {HostSingleVanLoader}>
-        <Route index element = {<HostSingleVanDetail />} loader = {async () => 
-        await requireAuth()}/>
-        <Route path = "pricing" element = {<HostSingleVanPricing  />} loader = {async () => 
-        await requireAuth()}/>
-        <Route path = "photos" element = {<HostSingleVanPhotos />} loader = {async () => 
-        await requireAuth()} /> 
+        <Route index element = {<HostSingleVanDetail />} loader = {async ({request}) => 
+        await requireAuth(request)}/>
+        <Route path = "pricing" element = {<HostSingleVanPricing  />} loader = {async ({request}) => 
+        await requireAuth(request)}/>
+        <Route path = "photos" element = {<HostSingleVanPhotos />} loader = {async ({request}) => 
+        await requireAuth(request)} /> 
       </Route>
     
 
