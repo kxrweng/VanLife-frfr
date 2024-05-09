@@ -1,28 +1,32 @@
 import React, {useState , useEffect} from 'react'
 import VanNavbar from '../../Components/VanNavbar';
-import {Link, useSearchParams, useLoaderData} from 'react-router-dom'
+import {Link, useSearchParams, useLoaderData, defer, Await} from 'react-router-dom'
 import { getVans } from '../../Utils/Api';
 
 export function loader (){
-    return getVans();
+    return defer({vans : getVans()});
 }
 
 const Vans = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const typeFilter = searchParams.get("type");
 
-    const vans = useLoaderData();
-    const displayedVans = typeFilter ? vans.filter((van) => van.type === typeFilter) : vans;
+    const vansPromise = useLoaderData();
+    
 
     
 
   return (
     <div className = "flex flex-col p-10 bg-[#FFF7ED]">
-        <VanNavbar/>
-
-        <div className = "flex flex-col gap-10 ">
-           {displayedVans.map((van) => {
-            return(
+       <Await resolve = {vansPromise.vans}>
+        {(vans) => {
+        const displayedVans = typeFilter ? vans.filter((van) => van.type === typeFilter) : vans;
+        return(
+            <>
+                    <VanNavbar/>
+                    <div className = "flex flex-col gap-10 ">
+                {displayedVans.map((van) => {
+                return(
                 
                 <div className = "flex flex-row bg-[#FFF7ED] p-5 gap-5 rounded-xl" key = {van.id}>
                     <Link to = {van.id} state = {{search : `?${searchParams.toString()}`, type : typeFilter}}> 
@@ -57,7 +61,14 @@ const Vans = () => {
                 </div>
             )
            })}
-        </div>
+                     </div>
+             </>
+        )
+
+        }}
+        </Await> 
+
+      
     </div>
   )
 
