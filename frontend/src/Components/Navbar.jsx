@@ -26,7 +26,7 @@ const Navbar = () => {
          <NavLink to = "/" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-2xl" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-xl "}>Home</NavLink>
          <NavLink to = "/about" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-2xl" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-xl "}>About</NavLink>
          <NavLink to = "/vans" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black font-inter font-semibold text-2xl" : "text-[#4D4D4D] hover:text-black font-semibold font-inter text-xl "}>Vans</NavLink>
-         <NavLink to = "/login"><img className = "w-[30px] h-[30px]"src = "/userIcon.png"/></NavLink>
+         <NavLink to = "/login" className = {({isActive}) => isActive ? "underline underline-offset-4 text-black text-2xl" : "text-[#4D4D4D] hover:text-black font-semibold text-xl"}><img className = "w-[30px] h-[30px]"src = "/userIcon.png"/></NavLink>
          </div>
          
 
