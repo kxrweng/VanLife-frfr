@@ -11,10 +11,13 @@ export function loader({ request }) {
     return new URL(request.url).searchParams.get("message")
 }
 
-export function action (){
-    console.log("Action Function");
+export async function  action ({request}){
+    const formData = await request.formData();
+    const email = formData.get("email");
+    const password = formData.get("password");
+    console.log(email,password);
     return null;
-    
+
 }
 const Login = () => {
     const warningMsg = useLoaderData();
