@@ -25,9 +25,6 @@ const Vans = () => {
 
     const vansPromise = useLoaderData();
     
-
-    
-
   return (
     <div className = "flex flex-col p-10 bg-[#FFF7ED]">
         <div className = "text-3xl font-inter font-bold mb-10">

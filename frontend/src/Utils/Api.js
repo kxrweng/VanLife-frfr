@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore/lite";
+import { getFirestore, query,where, collection, getDocs, doc, getDoc } from "firebase/firestore/lite";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB6ZaiZ-2ZKcKve7xnZb4md1jmGEyS5Pok",
@@ -22,20 +22,33 @@ export async function getVans(){
         ...doc.data(),
         id : doc.id
     }))
-    console.log(dataArr)
+    console.log(typeof dataArr[0].id)
     return dataArr
 }
 
 export async function getVan(id){
-    console.log(typeof id)
-    const docRef = doc(db,"vans",id)
+    console.log(typeof id);
+    const stringedId = id.toString();
+    const docRef = doc(db,"vans",stringedId)
     const vanSnapshot = await getDoc(docRef)
+    
     console.log(vanSnapshot)
     return {
         ...vanSnapshot.data(),
         id : vanSnapshot.id
-    
     }
+}
+
+export async function getHostVans() {
+    const q = query(vansCollectionRef, where("hostId", "==", "123"))
+    const querySnapshot = await getDocs(q)
+    const dataArr = querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+    }))
+    console.log("FIREBASE!");
+    console.log(dataArr);
+    return dataArr
 }
 // export async function getVans(id) {
 //     const url = id ? `/api/vans/${id}` : "/api/vans"
@@ -51,19 +64,20 @@ export async function getVan(id){
 //     return data.vans
 // }
 
-export async function getHostVans(id) {
-    const url = id ? `/api/host/vans/${id}` : "/api/host/vans"
-    const res = await fetch(url)
-    if (!res.ok) {
-        throw {
-            message: "Failed to fetch vans",
-            statusText: res.statusText,
-            status: res.status
-        }
-    }
-    const data = await res.json()
-    return data.vans
-}
+// export async function getHostVans(id) {
+//     const url = id ? `/api/host/vans/${id}` : "/api/host/vans"
+//     const res = await fetch(url)
+//     if (!res.ok) {
+//         throw {
+//             message: "Failed to fetch vans",
+//             statusText: res.statusText,
+//             status: res.status
+//         }
+//     }
+//     const data = await res.json()
+//     return data.vans
+// }
+
 
 export async function loginUser(creds) {
     const res = await fetch("/api/login",

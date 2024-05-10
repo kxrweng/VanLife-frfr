@@ -9,7 +9,7 @@ import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import Footer from './Components/Footer'
 import Vans, {loader as VansLoader} from './Pages/Van/Vans'
 import "./Server/Server"
-import VanDetail from './Pages/Van/VanDetail'
+import VanDetail,{Loader as VanDetailLoader} from './Pages/Van/VanDetail'
 import Layout from './Components/Layout'
 import HostPage from './Pages/Host/HostMain'
 import HostNavbar from './Components/HostNavbar'
@@ -37,7 +37,7 @@ const App = () => {
     <Route path = "login" element = {<Login />} loader = {LoginLoader} action = {LoginAction} />
     <Route path = "about" element = {<About />} />
     <Route path = "vans" element = {<Vans />} loader = {VansLoader} />
-    <Route path = "vans/:id" element = {<VanDetail />} />
+    <Route path = "vans/:id" element = {<VanDetail />} loader = {VanDetailLoader} />
 
     <Route path = "host" element = {<HostLayout />}  >
       <Route index element = {<HostMain />} loader = {async ({request}) => 
