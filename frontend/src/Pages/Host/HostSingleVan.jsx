@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import {useParams, NavLink, Outlet, useOutletContext, useLoaderData} from 'react-router-dom'
-import { getHostVans } from '../../Utils/Api'
+import { getHostVans,getVan } from '../../Utils/Api'
 import { requireAuth } from '../../Utils/RequireAuth'
 
 export async function Loader ({params , request}) {
     console.log(request);
     await requireAuth(request);
-    return getHostVans(params.id)
+    console.log(params.id)
+    console.log(typeof params.id)
+
+    return getVan(params.id)
 }
 const HostSingleVan = () => {
     //         <Outlet context = {{singleVan}}/> 

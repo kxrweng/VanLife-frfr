@@ -14,7 +14,7 @@ import Layout from './Components/Layout'
 import HostPage from './Pages/Host/HostMain'
 import HostNavbar from './Components/HostNavbar'
 import HostLayout from './Components/HostLayout'
-import HostMain from './Pages/Host/HostMain'
+import HostMain, {Loader as HostMainLoader} from './Pages/Host/HostMain'
 import HostIncome from './Pages/Host/HostIncome'
 import HostReviews from './Pages/Host/HostReviews'
 import HostVans, {Loader as HostVansLoader} from './Pages/Host/HostVans'
@@ -40,8 +40,7 @@ const App = () => {
     <Route path = "vans/:id" element = {<VanDetail />} loader = {VanDetailLoader} />
 
     <Route path = "host" element = {<HostLayout />}  >
-      <Route index element = {<HostMain />} loader = {async ({request}) => 
-        await requireAuth(request)}/>
+      <Route index element = {<HostMain />} loader = {HostMainLoader}/>
       <Route path = "income" element = {<HostIncome />} loader = {async ({request}) => 
         await requireAuth(request)}  />
       <Route path = "reviews" element = {<HostReviews />} loader = {async ({request}) => 

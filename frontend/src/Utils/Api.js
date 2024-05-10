@@ -40,7 +40,7 @@ export async function getVan(id){
 }
 
 export async function getHostVans() {
-    const q = query(vansCollectionRef, where("hostId", "==", "123"))
+    const q = query(vansCollectionRef, where("hostId", "==", 123))
     const querySnapshot = await getDocs(q)
     const dataArr = querySnapshot.docs.map(doc => ({
         ...doc.data(),

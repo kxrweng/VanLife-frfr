@@ -4,7 +4,8 @@ import { getHostVans, getVan } from '../../Utils/Api';
 
 export function Loader ({params}) {
     const {id} = params;
-    return getHostVans(id);
+    const stringedId = id.toString();
+    return getVan(stringedId);
 }
 
 const VanDetail = () => {
