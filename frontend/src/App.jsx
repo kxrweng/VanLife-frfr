@@ -29,7 +29,6 @@ import Login, {loader as LoginLoader, action as LoginAction} from './Pages/Gener
 import { requireAuth } from './Utils/RequireAuth'
 
 const App = () => {
-  localStorage.removeItem("LoggedIn")
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path = "/" element = {<Layout />}  errorElement = {<ErrorPage />}>
             
